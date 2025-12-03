@@ -6,14 +6,15 @@ sources:
     tables:
       - name: raw_gz_sales
         identifier: raw_gz_sales
-        description: gz_raw_data
+        description: my-project-20502-480109.gz_raw_data
         loaded_at_field: date_date
-        freshness:
+        freshness: 
+          error_after:
+            count: 2
+            period: day
           warn_after:
             count: 90
             period: day
-        
-        
         columns:
           - name: date_date
             description: date of purchase
