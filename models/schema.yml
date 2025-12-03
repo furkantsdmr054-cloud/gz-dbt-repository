@@ -1,0 +1,9 @@
+#schema.yml
+version: 2
+sources:
+  - name: gz_raw_data                 # Kaynak adı (örnek)
+    schema: gz_raw_data         # Warehouse içindeki şema adı
+    tables:
+      - name: gwz_sales            # Tablo adı
+      - name: gwz_product
+      - name: gwz_ship
