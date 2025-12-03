@@ -1,10 +1,9 @@
-dbt build -- select furkantsdmr054-cloud
-dbt test -- select furkantsdmr054-cloud
+
 
 # Name your project! Project names should contain only lowercase characters
 # and underscores. A good package name should reflect your organization's
 # name or the intended use of these models
-name: 'furkantsdmr054-cloud'
+name: 'dbt_furkantasdemir'
 version: '1.0.0'
 config-version: 2
 
