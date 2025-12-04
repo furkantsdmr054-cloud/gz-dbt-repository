@@ -1,9 +1,64 @@
 #schema.yml
 version: 2
 sources:
-  - name: gz_raw_data                 # Kaynak adı (örnek)
-    schema: gz_raw_data         # Warehouse içindeki şema adı
+  - name: gz_raw_data # Kaynak adı (örnek)
+    schema: gz_raw_data # Warehouse içindeki şema adı
     tables:
-      - name: gwz_sales            # Tablo adı
-      - name: gwz_product
-      - name: gwz_ship
+      - name: raw_gz_sales
+        identifier: raw_gz_sales
+        description: my-project-20502-480109.gz_raw_data
+        loaded_at_field: date_date
+        freshness: 
+          error_after:
+            count: 2
+            period: day
+          warn_after:
+            count: 90
+            period: day
+        columns:
+          - name: date_date
+            description: date of purchase
+            tests:
+              - not_null
+          - name: orders_id
+            description: Unique identifier of the order
+            tests:
+              - not_null
+          - name: pdt_id
+            description: Identifier of the product included in the order
+            tests:
+              - not_null
+          - name: revenue
+            description: Total revenue generated for the given product line (quantity * unit price)
+          - name: quantity
+            description: Number of units purchased for the given product_id
+            tests:
+              - not_null
+      - name: raw_gz_product
+        identifier: raw_gz_product
+        description: gz_raw_data
+        columns:
+          - name: products_id
+            description: Unique identifier for each product
+            tests:
+              - not_null
+          - name: purchSE_PRICE
+            description: Purchase price of the product after cleaning, cast to FLOAT64
+            tests:
+              - not_null
+      - name: raw_gz_ship
+        identifier: raw_gz_ship
+        description: gz_raw_data
+        columns:
+          - name: orders_id
+            description: Order identifier to which this shipment belongs
+            tests:
+              - not_null
+          - name: shipping_fee
+            description: Shipping fee charged to the customer
+            tests:
+              - not_null
+          - name: ship_cost 
+            description: Internal shipping cost, converted to FLOAT64
+            tests:
+              - not_null
