@@ -1,5 +1,5 @@
 {{ config(
-    materialized = 'table'
+    materialized = 'table' 
 ) }}
 WITH orders_per_day AS (
 	SELECT
