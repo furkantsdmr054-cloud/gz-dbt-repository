@@ -1,12 +1,10 @@
 SELECT
-    p.product_id,
+    p.products_id,
     s.date_date,
     s.orders_id,
     s.revenue,
     s.quantity,
     p.purchase_price,
-    CAST(margin AS int64) AS margin,
-    CAST(purchase_cost AS float64) AS purchase_cost, 
     ROUND (s.quantity*p.purchase_price,2) as purchase_cost,
     ROUND(s.revenue-s.quantity*p.purchase_price,2) as margin
 FROM  {{ref('stg_gz_raw_data__raw_gz_sales')}} s
