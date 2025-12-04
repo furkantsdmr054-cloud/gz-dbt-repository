@@ -1,4 +1,6 @@
--- finance_days.sql
+{{ config(
+    materialized = 'table'
+) }}
 WITH orders_per_day AS (
 	SELECT
 		date_date,
@@ -10,7 +12,7 @@ WITH orders_per_day AS (
 		ROUND(SUM(shipping_fee),0) AS shipping_fee,
 		ROUND(SUM(log_cost),0) AS log_cost,
 		ROUND(SUM(ship_cost),0) AS ship_cost,
-		SUM(quantity) AS quantity,
+		SUM(quantity) AS quantity
 	FROM {{ref("int_orders_operational")}}
 	GROUP BY date_date
 )
